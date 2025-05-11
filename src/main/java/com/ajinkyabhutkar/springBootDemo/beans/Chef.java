@@ -1,5 +1,7 @@
 package com.ajinkyabhutkar.springBootDemo.beans;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 
 
 @Component("myChef")
-public class Chef implements InitializingBean, DisposableBean {
+public class Chef {
 
     private LocalDate localDate;
     private Scanner scanner;
@@ -21,8 +23,9 @@ public class Chef implements InitializingBean, DisposableBean {
         System.out.println("===========================");
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception{
+
+    @PostConstruct
+    public void init() throws Exception{
         this.localDate=LocalDate.now();
         System.out.println("Customer arrived at "+localDate);
         System.out.println("===============================");
@@ -40,8 +43,8 @@ public class Chef implements InitializingBean, DisposableBean {
 
     }
 
-    @Override
-    public void destroy() throws Exception{
+    @PreDestroy
+    public void close() throws Exception{
         System.out.println("customer is leaving restaurant");
         this.localDate=null;
         this.scanner.close();
