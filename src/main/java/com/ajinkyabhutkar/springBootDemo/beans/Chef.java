@@ -45,6 +45,6 @@ public class Chef implements InitializingBean, DisposableBean {
         System.out.println("customer is leaving restaurant");
         this.localDate=null;
         this.scanner.close();
-        System.out.println("restaurant is closed");
+        System.out.println("restaurant is closed and will be opened tommorrow");
     }
 }
